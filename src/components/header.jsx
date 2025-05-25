@@ -9,6 +9,7 @@ import { Button } from "./ui/button";
 import { useAuth } from "../context/AuthContext";
 import UserAvatar from "./user-avatar";
 import { IconBorderSides } from '@tabler/icons-react';
+import { IconServerBolt } from '@tabler/icons-react';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +20,8 @@ const Header = () => {
     };
 
     return (
-        <header className="h-full w-full bg-gray-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10
- z-40">
-            <nav className="container flex justify-between items-center mx-auto px-6 h-16 ">
+        <header className="h-full w-2/3 bg-black/30 rounded-4xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 sticky top-3 z-40">
+            <nav className="container w-19/20 flex justify-between items-center mx-auto px-6 h-16 ">
                 <div className="flex items-center mb-1 space-x-2">
                     {/* <Image src="/logo.png" alt="Logo" width={35} height={35} /> */}
                     <p className="font-saman mt-1 text-3xl font-extrabold bg-gradient-to-r from-green-500 via-green-400 to-green-300 bg-clip-text text-transparent">
@@ -34,19 +34,20 @@ const Header = () => {
                         <div className="flex flex-col items-center gap-6">
                             <Link href="/">
                                 <div className="flex items-center">
-                                    <House size={20} />
-                                    <div className="mt-1 ml-1 ">Home</div>
+                                    <div className="mt-1 ml-1 ">Features</div>
                                 </div>
                             </Link>
                             <Link href="/team">
                                 <div className="flex items-center">
-                                    <IconBorderSides size={30} className="text-slate-800" />
-                                    <div className="mt-1 ml-1">Team</div>
+                                    <div className="mt-1 ml-1">About Us</div>
                                 </div>
                             </Link>
-                            <div className="flex items-center">
-                                {/* <SearchBar /> */}
-                            </div>
+                            <Link href="/team">
+                                <div className="flex items-center">
+                                    {/* <IconBorderSides size={30} className="text-slate-800" /> */}
+                                    <div className="mt-1 ml-1">Docs</div>
+                                </div>
+                            </Link>
                         </div>
 
                         <div className="flex items-center gap-6">
@@ -77,19 +78,20 @@ const Header = () => {
                 <div className="hidden lg:flex items-center gap-8">
                     <Link href="/">
                         <div className="flex items-center">
-                            <House size={20} />
-                            <div className="mt-1 ml-1">Home</div>
+                            <div className="mt-1 ml-1">Features</div>
                         </div>
                     </Link>
                     <Link href="/team">
                         <div className="flex items-center">
-                            <IconBorderSides size={30} />
-                            <div className="mt-1 ml-1">Team</div>
+                            <div className="mt-1 ml-1">About Us</div>
                         </div>
                     </Link>
-                    <div className="flex items-center">
-                        {/* <SearchBar /> */}
-                    </div>
+                    <Link href="/team">
+                        <div className="flex items-center">
+                            <div className="mt-1 ml-1">Docs</div>
+                        </div>
+                    </Link>
+
                 </div>
                 <div className="hidden lg:flex items-center space-x-2">
                     <div>

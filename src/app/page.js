@@ -4,6 +4,8 @@ import { CustomButton } from "../components/home/custom-button"
 import GridPattern from "../components/home/grid-pattern"
 import { FloatingNav } from '@/components/ui/floating-navbar'
 import { navItems } from '../utils/data'
+import Header from '@/components/header'
+import { IconServerBolt } from '@tabler/icons-react';
 
 export default function Page() {
   return (
@@ -20,7 +22,8 @@ export default function Page() {
         </div>
         <MenuIcon className="md:hidden ml-auto h-8 w-8 text-[#fcfcfc]" />
       </nav> */}
-      <FloatingNav navItems={navItems} />
+      {/* <FloatingNav navItems={navItems} /> */}
+      <Header />
 
       <div className="absolute h-full w-full flex items-center justify-center z-20">
         <div className="relative w-full max-w-3xl">
@@ -40,18 +43,10 @@ export default function Page() {
       <div className="relative h-full flex flex-col justify-center items-center z-20 py-20 text-center">
         <div className="text-4xl sm:text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter flex flex-col">
           <p className="m-0 leading-tight">Powerful</p>
-          <p className="m-0 leading-tight text-[#3CFFA5]">UI Design</p>
+          <p className="m-0 leading-tight text-[#3CFFA5] flex items-center gap-6">Database <span className='mt-2'><IconServerBolt stroke={2} size={128} /></span></p>
           <p className="m-0 leading-tight">Tool</p>
         </div>
       </div>
-
-      <Link
-        href="https://dribbble.com/shots/23181733-Blurry-Glassmorphic-Modern-Landing-page"
-        target="_blank"
-        className="absolute top-6 right-[10%] z-50 hidden md:block"
-      >
-        <CustomButton variant="primary">View Source</CustomButton>
-      </Link>
 
       <Link
         href="https://youtu.be/1pW_sk-2y40"
