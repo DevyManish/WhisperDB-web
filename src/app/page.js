@@ -11,18 +11,6 @@ export default function Page() {
   return (
     <div className="min-h-screen w-full bg-[#121212] text-[#fcfcfc] px-4 sm:px-[10%] flex flex-col items-center relative overflow-hidden">
       <GridPattern />
-
-      {/* <nav className="flex flex-row items-center gap-8 text-[#999999] w-full z-50 py-6">
-        <p className="font-bold text-xl sm:text-2xl">WhisperDB</p>
-        <div className="hidden md:flex items-center gap-8 text-lg">
-          <p className="hover:text-[#fcfcfc] cursor-pointer">Services</p>
-          <p className="hover:text-[#fcfcfc] cursor-pointer">Pricing</p>
-          <p className="hover:text-[#fcfcfc] cursor-pointer">Features</p>
-          <p className="hover:text-[#fcfcfc] cursor-pointer">About us</p>
-        </div>
-        <MenuIcon className="md:hidden ml-auto h-8 w-8 text-[#fcfcfc]" />
-      </nav> */}
-      {/* <FloatingNav navItems={navItems} /> */}
       <Header />
 
       <div className="absolute h-full w-full flex items-center justify-center z-20">
@@ -40,28 +28,31 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="relative h-full flex flex-col justify-center items-center z-20 py-20 text-center">
-        <div className="text-4xl sm:text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter flex flex-col">
+      <div className="relative h-full flex flex-col justify-center items-center z-20 py-20 mt-28 md:mt-0 md:py-20 text-center ">
+        <div className="text-7xl lg:text-[8rem] font-bold tracking-tighter flex flex-col">
           <p className="m-0 leading-tight">Powerful</p>
-          <p className="m-0 leading-tight text-[#3CFFA5] flex items-center gap-6">Database <span className='mt-2'><IconServerBolt stroke={2} size={128} /></span></p>
+          <p className="m-0 leading-tight text-[#3CFFA5] flex items-center">Database
+            <span className='mt-2 ml-5 hidden sm:block'><IconServerBolt stroke={2} size={128} /></span>
+            <span className='mt-3 ml-2 sm:hidden'><IconServerBolt stroke={2} size={70} /></span>
+          </p>
           <p className="m-0 leading-tight">Tool</p>
         </div>
       </div>
 
       <Link
-        href="https://youtu.be/1pW_sk-2y40"
+        href=""
         target="_blank"
         className="absolute bottom-[10%] right-[10%] z-50 hidden md:block"
       >
-        <CustomButton variant="accent">Watch Video</CustomButton>
+        <CustomButton variant="accent">Watch Tutorial</CustomButton>
       </Link>
 
       <Link
-        href="https://x.com/juxtopposed"
+        href=""
         target="_blank"
         className="absolute bottom-[20%] left-[10%] z-50 hidden md:block"
       >
-        <CustomButton variant="secondary">Connect</CustomButton>
+        <CustomButton variant="secondary">Get Started</CustomButton>
       </Link>
 
       <svg className="absolute top-0 right-0 z-30 opacity-50 w-1/4 max-w-[219px]" viewBox="0 0 219 147" fill="none" xmlns="http://www.w3.org/2000/svg">

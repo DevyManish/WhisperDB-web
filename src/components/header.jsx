@@ -1,15 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Menu, X, House, Store, Search, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
-// import { ModeToggle } from "./mode";
-// import { SearchBar } from "./SearchBar";
 import { useAuth } from "../context/AuthContext";
 import UserAvatar from "./user-avatar";
-import { IconBorderSides } from '@tabler/icons-react';
-import { IconServerBolt } from '@tabler/icons-react';
+
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -20,17 +17,16 @@ const Header = () => {
     };
 
     return (
-        <header className="h-full w-2/3 bg-black/30 rounded-4xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 sticky top-3 z-40">
+        <header className="h-full w-full md:w-2/3 bg-black/30 rounded-4xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 sticky top-3 z-40">
             <nav className="container w-19/20 flex justify-between items-center mx-auto px-6 h-16 ">
                 <div className="flex items-center mb-1 space-x-2">
-                    {/* <Image src="/logo.png" alt="Logo" width={35} height={35} /> */}
-                    <p className="font-saman mt-1 text-3xl font-extrabold bg-gradient-to-r from-green-500 via-green-400 to-green-300 bg-clip-text text-transparent">
+                    <p className=" mt-1  text-xl md:text-3xl font-extrabold bg-gradient-to-r from-green-500 via-green-400 to-green-300 bg-clip-text text-transparent">
                         <Link href="/">WhisperDB</Link>
                     </p>
                 </div>
 
                 {isOpen ? (
-                    <div className="bg-slate-200 dark:bg-gray-800 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 dark:bg-opacity-90 absolute top-[64px] left-0 w-full flex flex-col gap-6 items-center py-3 text-lg font-semibold">
+                    <div className="bg-black/30 rounded-4xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 absolute top-[64px] left-0 w-full flex flex-col gap-6 items-center py-3 text-lg font-semibold">
                         <div className="flex flex-col items-center gap-6">
                             <Link href="/">
                                 <div className="flex items-center">
