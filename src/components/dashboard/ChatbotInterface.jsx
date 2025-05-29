@@ -30,7 +30,7 @@ export const ChatbotInterface = () => {
         {
             id: "1",
             content:
-                "Hello! I'm your AI assistant powered by DeepSeek. How can I help you today?",
+                "Hello 👋🏼, how can I assist you today?",
             role: "assistant",
             timestamp: new Date()
         }
@@ -74,7 +74,7 @@ export const ChatbotInterface = () => {
                     {
                         role: "system",
                         content:
-                            "You are a helpful AI assistant. Be concise and helpful in your responses."
+                            "You are an advanced SQL generation assistant. Only respond to database-related prompts such as generating SQL queries, modifying schemas, understanding columns, or handling SQL errors. You must not answer any questions outside SQL and database operations. If the input is not clearly related to SQL or database context, respond with: 'I can only assist with SQL and database-related queries' nothing else apart from this. Ignore or politely reject any off-topic, conversational, or personal questions. Always keep responses brief, technical, and focused. Do not explain why you're rejecting off-topic inputs—just clearly state your scope."
                     },
                     ...messages.map(msg => ({
                         role: msg.role,
