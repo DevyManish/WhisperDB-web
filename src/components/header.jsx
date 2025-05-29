@@ -28,17 +28,17 @@ const Header = () => {
                 {isOpen ? (
                     <div className="bg-black/30 rounded-4xl bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 absolute top-[64px] left-0 w-full flex flex-col gap-6 items-center py-3 text-lg font-semibold">
                         <div className="flex flex-col items-center gap-6">
-                            <Link href="/">
+                            <Link href="#features">
                                 <div className="flex items-center">
                                     <div className="mt-1 ml-1 ">Features</div>
                                 </div>
                             </Link>
-                            <Link href="/team">
+                            <Link href="/about-us">
                                 <div className="flex items-center">
                                     <div className="mt-1 ml-1">About Us</div>
                                 </div>
                             </Link>
-                            <Link href="/team">
+                            <Link href="/docs">
                                 <div className="flex items-center">
                                     {/* <IconBorderSides size={30} className="text-slate-800" /> */}
                                     <div className="mt-1 ml-1">Docs</div>
@@ -72,17 +72,17 @@ const Header = () => {
                 </div>
 
                 <div className="hidden lg:flex items-center gap-8">
-                    <Link href="/">
+                    <Link href="#features">
                         <div className="flex items-center">
                             <div className="mt-1 ml-1">Features</div>
                         </div>
                     </Link>
-                    <Link href="/team">
+                    <Link href="/about-us">
                         <div className="flex items-center">
                             <div className="mt-1 ml-1">About Us</div>
                         </div>
                     </Link>
-                    <Link href="/team">
+                    <Link href="/doc">
                         <div className="flex items-center">
                             <div className="mt-1 ml-1">Docs</div>
                         </div>
@@ -92,7 +92,6 @@ const Header = () => {
                 <div className="hidden lg:flex items-center space-x-2">
                     <div>
                         <Link href="/sign-in">
-                            {/* <User size={20} /> */}
                             {user ? (
                                 <>
                                     <UserAvatar />
@@ -104,7 +103,6 @@ const Header = () => {
                             )}
                         </Link>
                     </div>
-                    {/* <ModeToggle /> */}
                 </div>
             </nav>
         </header>

@@ -1,9 +1,5 @@
-import { MenuIcon } from 'lucide-react'
 import Link from "next/link"
 import { CustomButton } from "../components/home/custom-button"
-import GridPattern from "../components/home/grid-pattern"
-import { FloatingNav } from '@/components/ui/floating-navbar'
-import { navItems } from '../utils/data'
 import Header from '@/components/header'
 import { IconServerBolt } from '@tabler/icons-react';
 import { CircleIcon, RectIcon } from '@/components/icons/icons'

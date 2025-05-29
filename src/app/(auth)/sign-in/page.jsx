@@ -5,7 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { GitHubIcon } from '@/components/icons/icons';
+import { GoogleIcon } from '@/components/icons/icons';
 
 export default function Page() {
     const handleSubmit = (e) => {
@@ -34,8 +34,8 @@ export default function Page() {
                         className="w-full bg-[#24292e]  border-[#3a3a3a] text-white"
                         onClick={() => console.log("GitHub button clicked")}
                     >
-                        <GitHubIcon />
-                        Continue with GitHub
+                        <GoogleIcon />
+                        Continue with Google
                     </Button>
 
                     <div className="relative">
