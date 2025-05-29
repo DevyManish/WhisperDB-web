@@ -1,35 +1,47 @@
 "use client"
-import { useEffect } from 'react';
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import React, { useState } from 'react';
+import { Sidebar } from '@/components/dashboard/Sidebar';
+import { ChatbotInterface } from '@/components/dashboard/ChatbotInterface';
 
-export default function Dashboard() {
-    const { user } = useAuth();
-    const router = useRouter();
+const Index = () => {
+    const [activeTab, setActiveTab] = useState('home');
 
-    useEffect(() => {
-        if (!user) {
-            router.replace("/sign-in");
+    const renderContent = () => {
+        switch (activeTab) {
+            case 'chatbot':
+                return <ChatbotInterface />;
+            case 'home':
+                return (
+                    <div className="flex-1 flex items-center justify-center p-8 overflow-hidden">
+                        <div className="text-center text-white relative z-30">
+                            <h1 className="text-4xl font-bold mb-4">Welcome to WhisperDB</h1>
+                            <p className="text-xl text-gray-400">Powerful Database tool supercharged by AI</p>
+                        </div>
+                    </div>
+                );
+            default:
+                return (
+                    <div className="flex-1 flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#1a1a1a] text-[#fcfcfc] p-8 overflow-hidden">
+                        <div className="text-center text-white">
+                            <h1 className="text-4xl font-bold mb-4">{activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}</h1>
+                            <p className="text-xl text-gray-400">Feature coming soon!</p>
+                        </div>
+                    </div>
+                );
         }
-    }, [user, router]);
+    };
 
-    if (!user) {
-        // Optionally show a loading spinner here
-        return null;
-    }
     return (
-        <div className="min-h-screen w-full bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#1a1a1a] text-[#fcfcfc] p-8">
-            <Card className="w-full max-w-2xl mx-auto bg-[#1a1a1a]/80 backdrop-blur-xl border border-[#2a2a2a] shadow-2xl">
-                <CardHeader>
-                    <CardTitle className="text-2xl font-bold text-white text-center">Welcome to Dashboard! 🎉</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-[#a0a0a0] text-center">
-                        Your account has been successfully created and you're now logged in.
-                    </p>
-                </CardContent>
-            </Card>
+        <div className="flex h-screen w-full bg-gradient-to-br from-[#0a0a0a] via-[#121212] to-[#1a1a1a] text-[#fcfcfc] overflow-hidden">
+            <div className="absolute h-full w-full flex items-center justify-center z-20 pointer-events-none">
+                <div className="w-full max-w-3xl">
+                    <div className="inset-0 h-48 w-48 bg-[#3CFFA5] rounded-full blur-[100px] z-0 top-0 pointer-events-none" />
+                </div>
+            </div>
+            <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+            {renderContent()}
         </div>
-    )
-}
+    );
+};
+
+export default Index;

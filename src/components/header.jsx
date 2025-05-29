@@ -11,7 +11,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { user, logout } = useAuth();
+    const { user } = useAuth();
     console.log(user);
 
     const getInitials = (name) => {

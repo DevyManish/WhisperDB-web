@@ -1,24 +1,29 @@
-import { IconHome, IconMessage, IconUser } from "@tabler/icons-react";
+import {
+    Home,
+    MessageSquare,
+    DatabaseZap,
+    Zap,
+    FileText,
+    History,
+    CreditCard,
+    LogOut,
+    CodeXml
+} from "lucide-react"
 
-export const navItems = [
-    {
-        name: "Home",
-        link: "/",
-        icon: <IconHome className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-    {
-        name: "About",
-        link: "/about",
-        icon: <IconUser className="h-4 w-4 text-neutral-500 dark:text-white" />,
-    },
-    {
-        name: "Contact",
-        link: "/contact",
-        icon: (
-            <IconMessage className="h-4 w-4 text-neutral-500 dark:text-white" />
-        ),
-    },
-];
+export const sidebarItems = [
+    { id: "home", label: "Home", icon: Home },
+    { id: "chatbot", label: "SQLBot", icon: MessageSquare },
+    { id: "database", label: "Databases", icon: DatabaseZap },
+    { id: "generator", label: "Generator", icon: Zap },
+    { id: "dev", label: "Dev Tools", icon: CodeXml }
+]
+
+export const bottomItems = [
+    { id: "files", label: "Files", icon: FileText },
+    { id: "history", label: "History", icon: History },
+    { id: "billing", label: "Plans & Billing", icon: CreditCard },
+    { id: "Logout", label: "LogOut", icon: LogOut }
+]
 
 export const indianStates = [
     "Andhra Pradesh",
