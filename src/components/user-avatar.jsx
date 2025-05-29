@@ -19,12 +19,7 @@ import Link from "next/link";
 
 const UserAvatar = () => {
     const { user, logout } = useAuth();
-    // const user = "Manish Gupta";
-    // const logout = () => {
-    //     console.log("logout");
-    // }
 
-    //console.log(user)
 
     const nameShorter = (name) => {
         const namePart = name.split(" ");
@@ -34,13 +29,18 @@ const UserAvatar = () => {
     };
 
     const shortName = user?.name ? nameShorter(user.name) : "";
+
     return (
         <>
             <DropdownMenu>
                 <DropdownMenuTrigger>
                     {" "}
-                    <Avatar className="h-9 w-9 border-2 ">
-                        <AvatarImage src="/avatars/01.png" alt="Avatar" />
+                    <Avatar className="h-9 w-9 ">
+                        <AvatarImage
+                            src={user?.photoURL || ""}
+                            alt={user?.displayName || "User"}
+                            referrerPolicy="no-referrer"
+                        />
                         <AvatarFallback>{shortName}</AvatarFallback>
                     </Avatar>
                 </DropdownMenuTrigger>

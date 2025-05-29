@@ -19,7 +19,6 @@ export default function Page() {
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
-            console.log(result)
             const user = {
                 name: result.user.displayName,
                 email: result.user.email,

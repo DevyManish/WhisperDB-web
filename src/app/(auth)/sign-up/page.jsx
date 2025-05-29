@@ -36,15 +36,12 @@ export default function MultiStepSignup() {
         try {
             setLoading(true)
             const result = await signInWithPopup(auth, googleProvider)
-            const user = result.user
-
-            localStorage.setItem("user", JSON.stringify({
-                name: user.displayName,
-                photoURL: user.photoURL,
-                accessToken: user.accessToken || user.stsTokenManager?.accessToken
-            }));
-
-            // Check if user already exists and is completed
+            const user = {
+                name: result.user.displayName,
+                email: result.user.email,
+                photoURL: result.user.photoURL,
+            };
+            login(user, result.user.accessToken);
             const userDoc = await getDoc(doc(db, "users", user.email))
             if (userDoc.exists() && userDoc.data().isCompleted) {
                 router.push("/dashboard") // Redirect to dashboard if already completed

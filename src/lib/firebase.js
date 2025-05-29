@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app"
 import { getAuth, GoogleAuthProvider } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
-console.log(process.env.NEXT_PUBLIC_API_KEY)
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_API_KEY,
