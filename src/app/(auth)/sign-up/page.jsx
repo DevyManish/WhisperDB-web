@@ -38,6 +38,12 @@ export default function MultiStepSignup() {
             const result = await signInWithPopup(auth, googleProvider)
             const user = result.user
 
+            localStorage.setItem("user", JSON.stringify({
+                name: user.displayName,
+                photoURL: user.photoURL,
+                accessToken: user.accessToken || user.stsTokenManager?.accessToken
+            }));
+
             // Check if user already exists and is completed
             const userDoc = await getDoc(doc(db, "users", user.email))
             if (userDoc.exists() && userDoc.data().isCompleted) {

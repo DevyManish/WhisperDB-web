@@ -6,8 +6,33 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { GoogleIcon } from '@/components/icons/icons';
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider, db } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
+import { useAuth } from '@/context/AuthContext';
 
 export default function Page() {
+
+    const { login } = useAuth();
+    const router = useRouter();
+
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            console.log(result)
+            const user = {
+                name: result.user.displayName,
+                email: result.user.email,
+                photoURL: result.user.photoURL,
+            };
+            login(user, result.user.accessToken);
+            router.push("/dashboard");
+        } catch (error) {
+            console.error("Error signing in with Google:", error);
+            alert("Google sign-in failed. Please try again.");
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Form submitted");
@@ -32,7 +57,7 @@ export default function Page() {
                     <Button
                         variant="outline"
                         className="w-full bg-[#24292e]  border-[#3a3a3a] text-white"
-                        onClick={() => console.log("GitHub button clicked")}
+                        onClick={handleGoogleSignIn}
                     >
                         <GoogleIcon />
                         Continue with Google

@@ -6,11 +6,22 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { useAuth } from "../context/AuthContext";
 import UserAvatar from "./user-avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { user, logout } = useAuth();
+
+    let photoURL = "";
+    if (typeof window !== "undefined") {
+        const userData = localStorage.getItem("user");
+        if (userData) {
+            try {
+                photoURL = JSON.parse(userData).photoURL;
+            } catch { }
+        }
+    }
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
@@ -94,7 +105,12 @@ const Header = () => {
                         <Link href="/sign-in">
                             {user ? (
                                 <>
-                                    <UserAvatar />
+                                    <Avatar>
+                                        <AvatarImage src={photoURL || "/placeholder.svg"} alt="User" />
+                                        <AvatarFallback className="bg-[#3CFFA5] text-black">
+                                            {user.displayName?.charAt(0) || "U"}
+                                        </AvatarFallback>
+                                    </Avatar>
                                 </>
                             ) : (
                                 <Button className="flex font-medium text-base rounded-full mt-2  px-5 py-2.5 mb-2 bg-green-500 hover:bg-green-400">
