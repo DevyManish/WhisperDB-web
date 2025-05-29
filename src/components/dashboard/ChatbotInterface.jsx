@@ -2,9 +2,11 @@
 import React, { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
-import { Send, Bot, User } from "lucide-react"
+import { Send, Bot } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import Groq from "groq-sdk"
+import Groq from "groq-sdk";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAuth } from "@/context/AuthContext";
 
 const groq = new Groq({
     apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
@@ -12,6 +14,18 @@ const groq = new Groq({
 })
 
 export const ChatbotInterface = () => {
+
+    const { user } = useAuth();
+
+    const nameShorter = (name) => {
+        const namePart = name.split(" ");
+        const firstChar = namePart[0]?.charAt(0).toUpperCase() || "";
+        const lastChar = namePart[1]?.charAt(0).toUpperCase() || "";
+        return firstChar + lastChar;
+    };
+
+    const shortName = user?.name ? nameShorter(user.name) : "";
+
     const [messages, setMessages] = useState([
         {
             id: "1",
@@ -144,7 +158,7 @@ export const ChatbotInterface = () => {
 
             <div className="flex-1 p-6 min-h-0">
                 <ScrollArea ref={scrollAreaRef} className="h-full">
-                    <div className="space-y-4">
+                    <div className="space-y-4 px-6">
                         {messages.map(message => (
                             <div
                                 key={message.id}
@@ -170,9 +184,15 @@ export const ChatbotInterface = () => {
                                 </div>
 
                                 {message.role === "user" && (
-                                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <User className="w-4 h-4 text-white" />
-                                    </div>
+                                    <Avatar className="h-9 w-9 ">
+                                        <AvatarImage
+                                            src={user?.photoURL || ""}
+                                            alt={user?.displayName || "User"}
+                                            referrerPolicy="no-referrer"
+                                        />
+                                        <AvatarFallback>{shortName}</AvatarFallback>
+                                    </Avatar>
+
                                 )}
                             </div>
                         ))}
@@ -199,10 +219,10 @@ export const ChatbotInterface = () => {
                         )}
                     </div>
                 </ScrollArea>
-            </div>
+            </div >
 
             {/* Input Area */}
-            <div className="p-6 border-t border-gray-800">
+            <div className="p-6 border-t border-gray-800" >
                 <div className="flex gap-4 ">
                     <Textarea
                         value={inputMessage}
@@ -220,7 +240,7 @@ export const ChatbotInterface = () => {
                         <Send className="w-4 h-4" />
                     </Button>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
