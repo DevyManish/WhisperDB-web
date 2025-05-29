@@ -5,8 +5,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Send, Bot } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Groq from "groq-sdk";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/context/AuthContext";
+import { MessageComponent } from "./MessageComponent";
 
 const groq = new Groq({
     apiKey: process.env.NEXT_PUBLIC_GROQ_API_KEY,
@@ -14,23 +14,12 @@ const groq = new Groq({
 })
 
 export const ChatbotInterface = () => {
-
     const { user } = useAuth();
-
-    const nameShorter = (name) => {
-        const namePart = name.split(" ");
-        const firstChar = namePart[0]?.charAt(0).toUpperCase() || "";
-        const lastChar = namePart[1]?.charAt(0).toUpperCase() || "";
-        return firstChar + lastChar;
-    };
-
-    const shortName = user?.name ? nameShorter(user.name) : "";
 
     const [messages, setMessages] = useState([
         {
             id: "1",
-            content:
-                "Hello 👋🏼, how can I assist you today?",
+            content: "Hello 👋🏼, how can I assist you today?",
             role: "assistant",
             timestamp: new Date()
         }
@@ -126,8 +115,7 @@ export const ChatbotInterface = () => {
         setMessages([
             {
                 id: "1",
-                content:
-                    "Hello! I'm your AI assistant powered by DeepSeek. How can I help you today?",
+                content: "Hello! I'm your AI assistant powered by DeepSeek. How can I help you today?",
                 role: "assistant",
                 timestamp: new Date()
             }
@@ -136,7 +124,6 @@ export const ChatbotInterface = () => {
 
     return (
         <div className="flex-1 flex flex-col p-8 h-screen min-h-0">
-
             <div className="p-6 border-b border-gray-800">
                 <div className="flex items-center justify-between">
                     <div>
@@ -160,43 +147,14 @@ export const ChatbotInterface = () => {
                 <ScrollArea ref={scrollAreaRef} className="h-full">
                     <div className="space-y-4 px-6">
                         {messages.map(message => (
-                            <div
+                            <MessageComponent
                                 key={message.id}
-                                className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"
-                                    }`}
-                            >
-                                {message.role === "assistant" && (
-                                    <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                        <Bot className="w-4 h-4 text-white" />
-                                    </div>
-                                )}
-
-                                <div
-                                    className={`max-w-[70%] rounded-lg p-4 ${message.role === "user"
-                                        ? "bg-[#1a1a1a]/80 backdrop-blur-xl border border-[#2a2a2a] shadow-2xl text-white"
-                                        : "bg-[#1a1a1a]/80 backdrop-blur-xl border border-[#2a2a2a] shadow-2xl text-gray-100"
-                                        }`}
-                                >
-                                    <p className="whitespace-pre-wrap">{message.content}</p>
-                                    <div className="text-xs opacity-60 mt-2">
-                                        {message.timestamp.toLocaleTimeString()}
-                                    </div>
-                                </div>
-
-                                {message.role === "user" && (
-                                    <Avatar className="h-9 w-9 ">
-                                        <AvatarImage
-                                            src={user?.photoURL || ""}
-                                            alt={user?.displayName || "User"}
-                                            referrerPolicy="no-referrer"
-                                        />
-                                        <AvatarFallback>{shortName}</AvatarFallback>
-                                    </Avatar>
-
-                                )}
-                            </div>
+                                message={message}
+                                isBot={message.role === "assistant"}
+                                user={user}
+                            />
                         ))}
-
+                        {/* sipnner animation */}
                         {isLoading && (
                             <div className="flex gap-3 justify-start">
                                 <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
@@ -219,11 +177,10 @@ export const ChatbotInterface = () => {
                         )}
                     </div>
                 </ScrollArea>
-            </div >
+            </div>
 
-            {/* Input Area */}
-            <div className="p-6 border-t border-gray-800" >
-                <div className="flex gap-4 ">
+            <div className="p-6 border-t border-gray-800">
+                <div className="flex gap-4">
                     <Textarea
                         value={inputMessage}
                         onChange={e => setInputMessage(e.target.value)}
@@ -235,12 +192,12 @@ export const ChatbotInterface = () => {
                     <Button
                         onClick={sendMessage}
                         disabled={!inputMessage.trim() || isLoading}
-                        className="bg-green-600 hover:bg-green-700 text-white px-6  self-end"
+                        className="bg-green-600 hover:bg-green-700 text-white px-6 self-end"
                     >
                         <Send className="w-4 h-4" />
                     </Button>
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     )
 }
