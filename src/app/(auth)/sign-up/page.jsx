@@ -13,6 +13,7 @@ import { doc, setDoc, getDoc } from "firebase/firestore"
 import { auth, googleProvider, db } from "@/lib/firebase"
 import { useRouter } from "next/navigation"
 import { indianStates, countries } from "@/utils/data";
+import { useAuth } from "@/context/AuthContext"
 
 export default function MultiStepSignup() {
     const [currentStep, setCurrentStep] = useState(1)
@@ -31,24 +32,25 @@ export default function MultiStepSignup() {
         },
     })
     const router = useRouter()
+    const { login } = useAuth();
 
     const handleGoogleSignIn = async () => {
         try {
             setLoading(true)
             const result = await signInWithPopup(auth, googleProvider)
-            const user = {
+            const userData = {
                 name: result.user.displayName,
                 email: result.user.email,
                 photoURL: result.user.photoURL,
             };
-            login(user, result.user.accessToken);
-            const userDoc = await getDoc(doc(db, "users", user.email))
+            login(userData, result.user.accessToken);
+            const userDoc = await getDoc(doc(db, "users", result.user.email))
             if (userDoc.exists() && userDoc.data().isCompleted) {
-                router.push("/dashboard") // Redirect to dashboard if already completed
+                router.push("/dashboard")
                 return
             }
 
-            setUser(user)
+            setUser(userData)
             setCurrentStep(2)
         } catch (error) {
             console.error("Error signing in with Google:", error)
@@ -94,7 +96,7 @@ export default function MultiStepSignup() {
         try {
             setLoading(true)
             const userData = {
-                fullname: user.displayName,
+                fullname: user.name,
                 email: user.email,
                 username: formData.username,
                 accountType: formData.accountType,
